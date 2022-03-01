@@ -56,6 +56,9 @@
 
         <th>
         </th>
+
+         <th>
+        </th>
       </tr>
 
       <% @list_of_bookmarks.each do |a_bookmark| %>
@@ -72,6 +75,12 @@
           <a href="/bookmarks/<%= a_bookmark.id %>">
             Show details
           </a>
+        </td>
+
+        <td>
+         <a href="/delete_bookmark/<%= a_bookmark.id %>">
+          Un-bookmark
+        </a>
         </td>
       </tr>
       <% end %>

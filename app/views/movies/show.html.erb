@@ -18,30 +18,38 @@
       </div>
     </div>
 
-    <hr>
-      <% matching_bookmarks = Bookmark.where({ :user_id => session[:user_id]}).where({ :movie_id => @the_movie.id }).at(0) %>
-      <% the_bookmark = matching_bookmarks %>
-      <% if the_bookmark == nil%>
-        <form action="/insert_bookmark" method="post">
-          <div>
-            <input value="<%= @current_user.id %>" type="hidden" id="user_id_box" name="query_user_id">
-          </div>
+    <% if session[:user_id] != nil%>
+      <hr>
+        <% matching_bookmarks = Bookmark.where({ :user_id => session[:user_id]}).where({ :movie_id => @the_movie.id }).at(0) %>
+        <% the_bookmark = matching_bookmarks %>
+        <% if the_bookmark == nil%>
+          <form action="/insert_bookmark" method="post">
+            <div>
+              <input 
+                value="<%= @current_user.id %>" 
+                type="hidden" 
+                id="user_id_box" 
+                name="query_user_id"
+              >
+            </div>
 
-          <div>
-            <input value="<%= @the_movie.id %>" type="hidden" name="query_movie_id" id="movie_id_box">
-            </input>
-          </div>
+            <div>
+              <input value="<%= @the_movie.id %>" type="hidden" name="query_movie_id" id="movie_id_box">
+              </input>
+            </div>
 
-          <button>
-            Bookmark this movie!
-          </button>
-        </form>
+            <button>
+              Bookmark this movie!
+            </button>
+          </form>
 
-      <% else %>
-         <a href="/delete_bookmark/<%= the_bookmark.id %>">
-          Un-bookmark
-        </a>
-      <% end %>
+        <% else %>
+          <a href="/delete_bookmark/<%= the_bookmark.id %>">
+            Un-bookmark
+          </a>
+        <% end %>
+      <% end%>
+
     </hr>
 
     <dl>
